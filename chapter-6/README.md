@@ -105,6 +105,8 @@ const order = await Order.create({
   status: 'pending'
 });
 
+```
+
 ## API Endpoints
 
 ### Content Management
