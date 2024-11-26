@@ -1,0 +1,3598 @@
+\documentclass[12pt,a4paper]{book}
+
+% Packages
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage[margin=1in]{geometry}
+\usepackage{url}
+\usepackage{minted}
+
+% Paket dasar
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{microtype} 
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{float}
+
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+
+% Konfigurasi untuk listings dengan dukungan YAML
+\usepackage{listings}
+\usepackage{textcomp}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+
+% Definisi syntax highlighting untuk YAML
+\definecolor{yamlgreen}{RGB}{63,127,63}
+\definecolor{yamlblue}{RGB}{0,0,255}
+\definecolor{yamlred}{RGB}{127,0,0}
+
+\lstdefinelanguage{yaml}{
+	keywords={true,false,null,y,n},
+	keywordstyle=\color{yamlblue}\bfseries,
+	basicstyle=\ttfamily\small,
+	sensitive=false,
+	comment=[l]{\#},
+	commentstyle=\color{yamlgreen}\itshape,
+	stringstyle=\color{yamlred},
+	morestring=[b]',
+	morestring=[b]",
+	moredelim=[l][\color{yamlblue}]:-,
+	moredelim=[l][\color{yamlblue}]:,
+	literate =    {---}{{\textcolor{yamlblue}{---}}}{3}
+	{>}{{\textcolor{yamlblue}{>}}}{1}
+	{|}{{\textcolor{yamlblue}{|}}}{1}
+	{\ -\ }{{\textcolor{yamlblue}{\ -\ }}}{3},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=2,
+	numbers=left,
+	numberstyle=\tiny,
+	frame=single,
+	showstringspaces=false
+}
+
+% Konfigurasi umum listings
+\lstset{
+	basicstyle=\ttfamily\small,
+	breaklines=true,
+	frame=single,
+	numbers=left,
+	numberstyle=\tiny,
+	keywordstyle=\color{blue},
+	commentstyle=\color{yamlgreen},
+	stringstyle=\color{yamlred},
+	showstringspaces=false,
+	captionpos=b
+}
+
+% Pengaturan float untuk gambar
+\floatplacement{figure}{H}
+
+% Pengaturan margin paragraf
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% Define colors for code blocks
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{commentcolor}{rgb}{0.25,0.5,0.35}
+\definecolor{keywordcolor}{rgb}{0.25,0.25,0.75}
+\definecolor{stringcolor}{rgb}{0.75,0.25,0.25}
+
+% Define JavaScript language for listings
+\lstdefinelanguage{JavaScript}{
+	keywords={async, await, break, case, catch, class, const, continue, debugger, default, delete, do, else, enum, export, extends, false, finally, for, function, if, import, in, instanceof, new, null, return, super, switch, this, throw, true, try, typeof, var, void, while, with, let},
+	keywordstyle=\color{keywordcolor}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{commentcolor}\ttfamily,
+	stringstyle=\color{stringcolor}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+% Define Bash language
+\lstdefinelanguage{bash}{
+	keywords={break, case, continue, do, done, elif, else, esac, fi, for, function, if, in, select, then, time, until, while},
+	keywordstyle=\color{keywordcolor}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{\#},
+	commentstyle=\color{commentcolor}\ttfamily,
+	stringstyle=\color{stringcolor}\ttfamily,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+% Configure code listing style
+\lstset{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	frame=single
+}
+
+% Configure listings package for code
+\lstset{
+	language=JavaScript,
+	basicstyle=\ttfamily\small,
+	breaklines=true,
+	breakindent=0pt,
+	columns=flexible,
+	numbers=left,
+	numberstyle=\tiny\color{gray},
+	backgroundcolor=\color{gray!10},
+	frame=single,
+	rulecolor=\color{black!40},
+	xleftmargin=15pt,
+	xrightmargin=15pt,
+	breakatwhitespace=true,
+	showstringspaces=false,
+	tabsize=2,
+	commentstyle=\color{green!60!black},
+	keywordstyle=\color{blue!70!black},
+	stringstyle=\color{red!60!black},
+	captionpos=b
+}
+
+% Title configuration
+\title{Mastering Sequelize with PostgreSQL\\
+	\large A Comprehensive Guide for Beginners}
+\author{Achmad Zaenuri}
+\date{\today}
+
+\begin{document}
+	
+	%\frontmatter
+	\maketitle
+	\tableofcontents
+	
+	%\mainmatter
+	
+	\chapter{Setting Up the Environment Properly}
+	
+	\section{Introduction}
+	This chapter will guide you through the process of setting up your development environment for working with Sequelize and PostgreSQL. As a beginner, you'll learn everything from installing the necessary software to creating your first database connection.
+	
+	\section{Prerequisites}
+	Before we begin, ensure you have the following installed on your system:
+	\begin{itemize}
+		\item Node.js (version 14.x or higher)
+		\item npm (usually comes with Node.js)
+		\item PostgreSQL (version 12.x or higher)
+	\end{itemize}
+	
+	\subsection{Installing Node.js}
+	Follow these steps to install Node.js:
+	\begin{enumerate}
+		\item Visit the official Node.js website: \url{https://nodejs.org}
+		\item Download the LTS (Long Term Support) version
+		\item Follow the installation wizard for your operating system
+		\item Verify installation by opening a terminal and running:
+	\end{enumerate}
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+$ node --version
+$ npm --version
+	\end{minted}
+	
+	\subsection{Installing PostgreSQL}
+	Follow these steps to install PostgreSQL:
+	\begin{enumerate}
+		\item Visit: \url{https://www.postgresql.org/download/}
+		\item Choose your operating system and follow the installation instructions
+		\item Note down the superuser (postgres) password during installation
+		\item Verify installation by running:
+	\end{enumerate}
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+$ psql --version
+	\end{minted}
+	
+	\section{Project Setup}
+	
+	\subsection{Creating a New Node.js Project}
+
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+$ mkdir my-sequelize-project
+$ cd my-sequelize-project
+$ npm init -y
+		\end{minted}
+
+	
+	\subsection{Installing Required Dependencies}
+	\begin{tcolorbox}[title=Installing Packages]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+$ npm install sequelize sequelize-cli pg pg-hstore
+$ npm install nodemon --save-dev
+		\end{minted}
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[title=Note]
+		The \texttt{pg} package is the PostgreSQL driver, and \texttt{pg-hstore} is required for storing and retrieving JSON data.
+	\end{tcolorbox}
+	
+	\section{Database Configuration}
+	
+	\subsection{Creating a Database}
+	\begin{tcolorbox}[title=PostgreSQL Commands]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+-- Connect to PostgreSQL
+$ psql -U postgres
+
+-- Create a new database
+postgres=# CREATE DATABASE my_sequelize_db;
+
+-- Verify database creation
+postgres=# \l
+		\end{minted}
+	\end{tcolorbox}
+	
+	\subsection{Project Structure}
+	Create the following directory structure:
+	
+	\begin{verbatim}
+		my-sequelize-project/
+		├── config/
+		│   └── database.js
+		├── models/
+		│   └── index.js
+		├── migrations/
+		├── seeders/
+		└── package.json
+	\end{verbatim}
+	
+	\subsection{Database Configuration File}
+	Create \texttt{config/database.js}:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+module.exports = {
+	development: {
+		username: 'postgres',
+		password: 'your_password',
+		database: 'my_sequelize_db',
+		host: '127.0.0.1',
+		dialect: 'postgres',
+		logging: console.log,
+		pool: {
+			max: 5,
+			min: 0,
+			acquire: 30000,
+			idle: 10000
+		}
+	}
+};
+	\end{minted}
+	
+	\section{Database Connection}
+	
+	\subsection{Setting Up the Connection}
+	Create \texttt{models/index.js}:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const { Sequelize } = require('sequelize');
+const config = require('../config/database.js');
+
+const env = process.env.NODE_ENV || 'development';
+const dbConfig = config[env];
+
+const sequelize = new Sequelize(
+dbConfig.database,
+dbConfig.username,
+dbConfig.password,
+{
+	host: dbConfig.host,
+	dialect: dbConfig.dialect,
+	logging: dbConfig.logging,
+	pool: dbConfig.pool
+}
+);
+
+module.exports = sequelize;
+	\end{minted}
+	
+	\subsection{Testing the Connection}
+	Create a test file (\texttt{test.js}):
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const sequelize = require('./models');
+
+async function testConnection() {
+	try {
+		await sequelize.authenticate();
+		console.log('Connection successful!');
+	} catch (error) {
+		console.error('Connection failed:', error);
+	} finally {
+		await sequelize.close();
+	}
+}
+
+testConnection();
+	\end{minted}
+	
+	\section{Environment Variables}
+	
+	\subsection{Setting Up Environment Variables}
+	First, install the dotenv package:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+$ npm install dotenv
+	\end{minted}
+	
+	Create a \texttt{.env} file:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{ini}
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+DB_DATABASE=my_sequelize_db
+DB_HOST=127.0.0.1
+DB_DIALECT=postgres
+NODE_ENV=development
+	\end{minted}
+	
+	\section{Common Issues and Solutions}
+	
+	\begin{description}
+		\item[Connection Refused] 
+		\begin{itemize}
+			\item Check if PostgreSQL service is running
+			\item Verify port availability (default: 5432)
+		\end{itemize}
+		
+		\item[Authentication Failed] 
+		\begin{itemize}
+			\item Verify username and password
+			\item Check database permissions
+		\end{itemize}
+		
+		\item[Database Not Found] 
+		\begin{itemize}
+			\item Ensure database was created
+			\item Check database name spelling
+		\end{itemize}
+	\end{description}
+	
+	\section{Best Practices}
+	
+	\subsection{Security}
+	\begin{itemize}
+		\item Never commit .env files to version control
+		\item Use environment variables for sensitive data
+		\item Implement proper error handling
+		\item Use connection pooling for better performance
+	\end{itemize}
+	
+	\subsection{Configuration}
+	\begin{itemize}
+		\item Set up different configurations per environment
+		\item Use appropriate logging levels
+		\item Implement connection timeouts
+		\item Set reasonable pool sizes
+	\end{itemize}
+	
+	\section{Summary}
+	In this chapter, we covered:
+	\begin{itemize}
+		\item Environment setup
+		\item Database configuration
+		\item Connection management
+		\item Environment variables
+		\item Best practices
+		\item Common issues and solutions
+	\end{itemize}
+	
+	\chapter{Model Design Best Practices}
+	
+	\section{Introduction}
+	In this chapter, we'll explore how to design and implement database models effectively using Sequelize. You'll learn about data types, relationships, validations, and best practices for structuring your models.
+	
+	\section{Understanding Models in Sequelize}
+	
+	\subsection{What is a Model?}
+	A model in Sequelize is a representation of a database table. It defines the structure of your data and how it should be stored and retrieved.
+	
+	\begin{tcolorbox}[title=Basic Model Structure]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
+
+class User extends Model {}
+
+User.init({
+	// Model attributes here
+}, {
+	sequelize,
+	modelName: 'User'
+});
+		\end{minted}
+	\end{tcolorbox}
+	
+	\section{Data Types and Attributes}
+	
+	\subsection{Common Data Types}
+	Sequelize provides various data types that map to PostgreSQL types:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const { DataTypes } = require('sequelize');
+
+const User = sequelize.define('User', {
+	// String types
+	username: {
+		type: DataTypes.STRING(100),    // VARCHAR(100)
+		allowNull: false
+	},
+	description: {
+		type: DataTypes.TEXT            // TEXT
+	},
+	
+	// Numeric types
+	age: {
+		type: DataTypes.INTEGER         // INTEGER
+	},
+	balance: {
+		type: DataTypes.DECIMAL(10, 2)  // DECIMAL(10,2)
+	},
+	
+	// Date types
+	birthDate: {
+		type: DataTypes.DATE            // TIMESTAMP WITH TIME ZONE
+	},
+	
+	// Boolean type
+	isActive: {
+		type: DataTypes.BOOLEAN         // BOOLEAN
+	},
+	
+	// JSON type
+	settings: {
+		type: DataTypes.JSONB           // JSONB
+	},
+	
+	// UUID type
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	}
+});
+	\end{minted}
+	
+	\subsection{Column Options}
+	Important column options to consider:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const Product = sequelize.define('Product', {
+	name: {
+		type: DataTypes.STRING,
+		allowNull: false,              // NOT NULL constraint
+		unique: true,                  // UNIQUE constraint
+		defaultValue: 'New Product',   // DEFAULT value
+		validate: {
+			notEmpty: true,             // Custom validation
+			len: [3, 50]                // Length validation
+		}
+	},
+	price: {
+		type: DataTypes.DECIMAL(10, 2),
+		validate: {
+			min: 0                      // Minimum value validation
+		}
+	}
+});
+	\end{minted}
+	
+	\section{Model Relationships}
+	
+	\subsection{Types of Relationships}
+	Sequelize supports various types of relationships:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// One-to-One relationship
+User.hasOne(Profile);
+Profile.belongsTo(User);
+
+// One-to-Many relationship
+User.hasMany(Post);
+Post.belongsTo(User);
+
+// Many-to-Many relationship
+User.belongsToMany(Role, { through: 'UserRoles' });
+Role.belongsToMany(User, { through: 'UserRoles' });
+	\end{minted}
+	
+	\subsection{Relationship Options}
+	Advanced relationship configurations:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// One-to-Many with cascading delete
+User.hasMany(Post, {
+	foreignKey: {
+		name: 'userId',
+		allowNull: false
+	},
+	onDelete: 'CASCADE',
+	onUpdate: 'CASCADE'
+});
+
+// Many-to-Many with extra attributes
+const UserRoles = sequelize.define('UserRoles', {
+	grantedAt: DataTypes.DATE,
+	grantedBy: DataTypes.STRING
+});
+
+User.belongsToMany(Role, { 
+	through: UserRoles,
+	foreignKey: 'userId'
+});
+
+Role.belongsToMany(User, { 
+	through: UserRoles,
+	foreignKey: 'roleId'
+});
+	\end{minted}
+	
+	\section{Model Validations}
+	
+	\subsection{Built-in Validators}
+	Sequelize provides several built-in validators:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const User = sequelize.define('User', {
+	email: {
+		type: DataTypes.STRING,
+		validate: {
+			isEmail: true,           // Email format
+			notNull: true,           // NOT NULL
+			notEmpty: true           // Not empty string
+		}
+	},
+	age: {
+		type: DataTypes.INTEGER,
+		validate: {
+			min: 0,                  // Minimum value
+			max: 120,                // Maximum value
+			isInt: true             // Must be integer
+		}
+	},
+	website: {
+		type: DataTypes.STRING,
+		validate: {
+			isUrl: true             // Must be URL
+		}
+	}
+});
+	\end{minted}
+	
+	\subsection{Custom Validators}
+	Creating custom validation rules:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const User = sequelize.define('User', {
+	password: {
+		type: DataTypes.STRING,
+		validate: {
+			isStrongPassword(value) {
+				if (!/[A-Z]/.test(value)) {
+					throw new Error('Password must contain uppercase letter');
+				}
+				if (!/[0-9]/.test(value)) {
+					throw new Error('Password must contain number');
+				}
+				if (value.length < 8) {
+					throw new Error('Password must be at least 8 characters');
+				}
+			}
+		}
+	}
+});
+	\end{minted}
+	
+	\section{Model Hooks}
+	
+	\subsection{Lifecycle Hooks}
+	Hooks allow you to trigger actions before or after specific events:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const User = sequelize.define('User', {
+	username: DataTypes.STRING,
+	password: DataTypes.STRING
+}, {
+	hooks: {
+		beforeCreate: async (user) => {
+			// Hash password before saving
+			user.password = await bcrypt.hash(user.password, 10);
+		},
+		beforeUpdate: async (user) => {
+			// Hash password if it's changed
+			if (user.changed('password')) {
+				user.password = await bcrypt.hash(user.password, 10);
+			}
+		}
+	}
+});
+	\end{minted}
+	
+	\section{Best Practices}
+	
+	\subsection{Naming Conventions}
+	\begin{itemize}
+		\item Use PascalCase for model names (e.g., \texttt{User}, \texttt{BlogPost})
+		\item Use camelCase for attribute names (e.g., \texttt{firstName}, \texttt{createdAt})
+		\item Use underscores for table names (e.g., \texttt{blog\_posts}, \texttt{user\_roles})
+	\end{itemize}
+	
+	\subsection{Model Organization}
+	Keep your models organized:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// models/index.js
+const User = require('./user.model');
+const Post = require('./post.model');
+const Comment = require('./comment.model');
+
+// Set up associations
+User.hasMany(Post);
+Post.belongsTo(User);
+Post.hasMany(Comment);
+Comment.belongsTo(Post);
+
+module.exports = {
+	User,
+	Post,
+	Comment
+};
+	\end{minted}
+	
+	\section{Performance Considerations}
+	
+	\subsection{Indexing}
+	Add indexes for frequently queried fields:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const User = sequelize.define('User', {
+	email: {
+		type: DataTypes.STRING,
+		unique: true,
+		index: true
+	}
+}, {
+	indexes: [
+	{
+		fields: ['createdAt'],
+		name: 'user_created_at_idx'
+	},
+	{
+		fields: ['email', 'status'],
+		name: 'user_email_status_idx'
+	}
+	]
+});
+	\end{minted}
+	
+	\section{Practical Examples}
+	
+	\subsection{E-Commerce System}
+	Let's build a comprehensive e-commerce system model structure:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// models/user.model.js
+const User = sequelize.define('User', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	},
+	email: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		unique: true,
+		validate: {
+			isEmail: true
+		}
+	},
+	password: {
+		type: DataTypes.STRING,
+		allowNull: false
+	},
+	role: {
+		type: DataTypes.ENUM('customer', 'admin', 'vendor'),
+		defaultValue: 'customer'
+	},
+	lastLoginAt: {
+		type: DataTypes.DATE
+	},
+	status: {
+		type: DataTypes.ENUM('active', 'inactive', 'suspended'),
+		defaultValue: 'active'
+	}
+}, {
+	hooks: {
+		beforeCreate: async (user) => {
+			user.password = await bcrypt.hash(user.password, 10);
+		}
+	},
+	indexes: [
+	{ fields: ['email'] },
+	{ fields: ['status', 'role'] }
+	]
+});
+
+// models/product.model.js
+const Product = sequelize.define('Product', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	},
+	name: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		validate: {
+			len: [3, 100]
+		}
+	},
+	slug: {
+		type: DataTypes.STRING,
+		unique: true
+	},
+	description: {
+		type: DataTypes.TEXT
+	},
+	price: {
+		type: DataTypes.DECIMAL(10, 2),
+		allowNull: false,
+		validate: {
+			min: 0
+		}
+	},
+	stock: {
+		type: DataTypes.INTEGER,
+		allowNull: false,
+		defaultValue: 0,
+		validate: {
+			min: 0
+		}
+	},
+	metadata: {
+		type: DataTypes.JSONB,
+		defaultValue: {}
+	}
+}, {
+	hooks: {
+		beforeValidate: (product) => {
+			if (product.name && !product.slug) {
+				product.slug = product.name
+				.toLowerCase()
+				.replace(/[^a-zA-Z0-9]/g, '-')
+				.replace(/-+/g, '-');
+			}
+		}
+	}
+});
+
+// models/order.model.js
+const Order = sequelize.define('Order', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	},
+	status: {
+		type: DataTypes.ENUM(
+		'pending',
+		'processing',
+		'shipped',
+		'delivered',
+		'cancelled'
+		),
+		defaultValue: 'pending'
+	},
+	totalAmount: {
+		type: DataTypes.DECIMAL(10, 2),
+		allowNull: false
+	},
+	shippingAddress: {
+		type: DataTypes.JSONB,
+		allowNull: false
+	},
+	paymentStatus: {
+		type: DataTypes.ENUM('pending', 'paid', 'failed', 'refunded'),
+		defaultValue: 'pending'
+	}
+});
+
+// models/orderItem.model.js
+const OrderItem = sequelize.define('OrderItem', {
+	quantity: {
+		type: DataTypes.INTEGER,
+		allowNull: false,
+		validate: {
+			min: 1
+		}
+	},
+	priceAtTime: {
+		type: DataTypes.DECIMAL(10, 2),
+		allowNull: false
+	}
+});
+
+// Set up relationships
+User.hasMany(Order);
+Order.belongsTo(User);
+
+Order.hasMany(OrderItem);
+OrderItem.belongsTo(Order);
+
+Product.hasMany(OrderItem);
+OrderItem.belongsTo(Product);
+	\end{minted}
+	
+	\subsection{Blog System with Categories and Tags}
+	Example of a blog system with categories and tags:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// models/category.model.js
+const Category = sequelize.define('Category', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	},
+	name: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		unique: true
+	},
+	slug: {
+		type: DataTypes.STRING,
+		unique: true
+	},
+	description: DataTypes.TEXT
+}, {
+	hooks: {
+		beforeValidate: (category) => {
+			if (category.name && !category.slug) {
+				category.slug = category.name
+				.toLowerCase()
+				.replace(/[^a-zA-Z0-9]/g, '-');
+			}
+		}
+	}
+});
+
+// models/post.model.js
+const Post = sequelize.define('Post', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	},
+	title: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		validate: {
+			len: [3, 150]
+		}
+	},
+	slug: {
+		type: DataTypes.STRING,
+		unique: true
+	},
+	content: {
+		type: DataTypes.TEXT,
+		allowNull: false
+	},
+	status: {
+		type: DataTypes.ENUM('draft', 'published', 'archived'),
+		defaultValue: 'draft'
+	},
+	publishedAt: DataTypes.DATE,
+	metadata: {
+		type: DataTypes.JSONB,
+		defaultValue: {
+			views: 0,
+			likes: 0,
+			readingTime: null
+		}
+	}
+}, {
+	hooks: {
+		beforeValidate: (post) => {
+			if (post.title && !post.slug) {
+				post.slug = post.title
+				.toLowerCase()
+				.replace(/[^a-zA-Z0-9]/g, '-');
+			}
+		},
+		beforeCreate: (post) => {
+			if (post.status === 'published' && !post.publishedAt) {
+				post.publishedAt = new Date();
+			}
+		}
+	},
+	indexes: [
+	{ fields: ['status', 'publishedAt'] }
+	]
+});
+
+// models/tag.model.js
+const Tag = sequelize.define('Tag', {
+	name: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		unique: true
+	},
+	slug: {
+		type: DataTypes.STRING,
+		unique: true
+	}
+});
+
+// models/postTag.model.js
+const PostTag = sequelize.define('PostTag', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	}
+});
+
+// Set up relationships
+Category.hasMany(Post);
+Post.belongsTo(Category);
+
+Post.belongsToMany(Tag, { through: PostTag });
+Tag.belongsToMany(Post, { through: PostTag });
+
+User.hasMany(Post);
+Post.belongsTo(User, {
+	as: 'author',
+	foreignKey: {
+		name: 'authorId',
+		allowNull: false
+	}
+});
+	\end{minted}
+	
+	\subsection{Social Network Connections}
+	Example of handling social network connections:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// models/friendship.model.js
+const Friendship = sequelize.define('Friendship', {
+	status: {
+		type: DataTypes.ENUM('pending', 'accepted', 'blocked'),
+		defaultValue: 'pending'
+	},
+	blockedBy: {
+		type: DataTypes.UUID,
+		allowNull: true
+	}
+}, {
+	indexes: [
+	{
+		fields: ['status']
+	}
+	]
+});
+
+// models/user.model.js
+User.belongsToMany(User, {
+	as: 'friends',
+	through: Friendship,
+	foreignKey: 'userId',
+	otherKey: 'friendId'
+});
+
+// Helper methods for the User model
+User.prototype.sendFriendRequest = async function(friendId) {
+	return await Friendship.create({
+		userId: this.id,
+		friendId: friendId,
+		status: 'pending'
+	});
+};
+
+User.prototype.acceptFriendRequest = async function(friendId) {
+	const friendship = await Friendship.findOne({
+		where: {
+			userId: friendId,
+			friendId: this.id,
+			status: 'pending'
+		}
+	});
+	
+	if (!friendship) {
+		throw new Error('Friend request not found');
+	}
+	
+	await friendship.update({ status: 'accepted' });
+	
+	// Create reverse friendship
+	await Friendship.create({
+		userId: this.id,
+		friendId: friendship.userId,
+		status: 'accepted'
+	});
+	
+	return friendship;
+};
+
+User.prototype.blockUser = async function(userId) {
+	const [friendship] = await Friendship.findOrCreate({
+		where: {
+			userId: this.id,
+			friendId: userId
+		},
+		defaults: {
+			status: 'blocked',
+			blockedBy: this.id
+		}
+	});
+	
+	if (friendship.status !== 'blocked') {
+		await friendship.update({
+			status: 'blocked',
+			blockedBy: this.id
+		});
+	}
+	
+	// Remove reverse friendship if exists
+	await Friendship.destroy({
+		where: {
+			userId: userId,
+			friendId: this.id
+		}
+	});
+	
+	return friendship;
+};
+	\end{minted}
+	
+	\subsection{File Management System}
+	Example of a file management system with folders:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// models/folder.model.js
+const Folder = sequelize.define('Folder', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	},
+	name: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		validate: {
+			len: [1, 255]
+		}
+	},
+	path: {
+		type: DataTypes.STRING,
+		allowNull: false
+	},
+	parentId: {
+		type: DataTypes.UUID,
+		allowNull: true
+	}
+}, {
+	hooks: {
+		beforeValidate: async (folder) => {
+			if (folder.parentId) {
+				const parent = await Folder.findByPk(folder.parentId);
+				folder.path = `${parent.path}/${folder.name}`;
+			} else {
+				folder.path = `/${folder.name}`;
+			}
+		}
+	},
+	indexes: [
+	{ fields: ['path'], unique: true },
+	{ fields: ['parentId'] }
+	]
+});
+
+// models/file.model.js
+const File = sequelize.define('File', {
+	id: {
+		type: DataTypes.UUID,
+		defaultValue: DataTypes.UUIDV4,
+		primaryKey: true
+	},
+	name: {
+		type: DataTypes.STRING,
+		allowNull: false,
+		validate: {
+			len: [1, 255]
+		}
+	},
+	mimeType: {
+		type: DataTypes.STRING,
+		allowNull: false
+	},
+	size: {
+		type: DataTypes.BIGINT,
+		allowNull: false,
+		validate: {
+			min: 0
+		}
+	},
+	path: {
+		type: DataTypes.STRING,
+		allowNull: false
+	},
+	metadata: {
+		type: DataTypes.JSONB,
+		defaultValue: {}
+	}
+}, {
+	hooks: {
+		beforeValidate: async (file) => {
+			if (file.folderId) {
+				const folder = await Folder.findByPk(file.folderId);
+				file.path = `${folder.path}/${file.name}`;
+			} else {
+				file.path = `/${file.name}`;
+			}
+		}
+	},
+	indexes: [
+	{ fields: ['path'], unique: true },
+	{ fields: ['mimeType'] }
+	]
+});
+
+// Set up relationships
+Folder.hasMany(Folder, {
+	as: 'subfolders',
+	foreignKey: 'parentId'
+});
+Folder.belongsTo(Folder, {
+	as: 'parent',
+	foreignKey: 'parentId'
+});
+
+Folder.hasMany(File);
+File.belongsTo(Folder);
+
+User.hasMany(Folder);
+Folder.belongsTo(User, {
+	as: 'owner'
+});
+
+User.hasMany(File);
+File.belongsTo(User, {
+	as: 'owner'
+});
+	\end{minted}
+	
+	These examples demonstrate:
+	\begin{itemize}
+		\item Complex model relationships
+		\item Advanced validation rules
+		\item Custom hooks for data processing
+		\item Proper indexing strategies
+		\item Real-world business logic implementation
+		\item Proper use of JSONB for flexible data
+		\item Comprehensive error handling
+	\end{itemize}
+	
+	\section{Common Pitfalls}
+	
+	\begin{itemize}
+		\item Circular dependencies in relationships
+		\item Missing indexes on foreign keys
+		\item Improper data type selection
+		\item Inefficient relationship definitions
+	\end{itemize}
+	
+	\section{Summary}
+	In this chapter, we covered:
+	\begin{itemize}
+		\item Model definition and structure
+		\item Data types and attributes
+		\item Relationships and associations
+		\item Validations and hooks
+		\item Best practices and performance considerations
+	\end{itemize}
+	
+	\chapter{Query Optimization Techniques}
+	
+	\section{Introduction}
+	Understanding how to write efficient queries is crucial for building performant applications. In this chapter, we'll explore various techniques for querying your database using Sequelize, starting from basic operations and progressing to more advanced concepts. We'll focus not just on how to write queries, but also on understanding why certain approaches are more efficient than others.
+	
+	\section{Basic Query Operations}
+	Before diving into optimization, it's essential to understand the fundamental query operations in Sequelize. These operations form the building blocks of all database interactions in your application.
+	
+	\subsection{Finding Records}
+	When working with databases, retrieving data is one of the most common operations. Sequelize provides several methods to find records, each suited for different scenarios.
+	
+	\subsubsection{Finding a Single Record}
+	The most basic operation is finding a single record. Sequelize provides multiple ways to achieve this:
+	
+	\begin{tcolorbox}[title=Finding by Primary Key]
+		The \texttt{findByPk} method is the most straightforward way to retrieve a record when you know its primary key:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const user = await User.findByPk(userId);
+		\end{minted}
+		
+		Under the hood, this generates a SQL query like:
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+SELECT * FROM "users" WHERE id = userId LIMIT 1;
+		\end{minted}
+		
+		Use this method when:
+		\begin{itemize}
+			\item You know the exact primary key
+			\item You need to retrieve a specific record
+			\item You're sure the record exists (returns null if not found)
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[title=Finding One Record with Conditions]
+		When you need to find a record based on specific conditions, use \texttt{findOne}:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const admin = await User.findOne({
+	where: {
+		role: 'admin',
+		status: 'active'
+	}
+});
+		\end{minted}
+		
+		This generates:
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+SELECT * FROM "users" 
+WHERE role = 'admin' AND status = 'active' 
+LIMIT 1;
+		\end{minted}
+		
+		Use this method when:
+		\begin{itemize}
+			\item You need to find a record based on conditions
+			\item You want only the first matching record
+			\item The record might not exist
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsubsection{Finding Multiple Records}
+	Often, you'll need to retrieve multiple records that match certain criteria. The \texttt{findAll} method is your primary tool for this purpose.
+	
+	\begin{tcolorbox}[title=Basic FindAll Usage]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+const activeUsers = await User.findAll({
+	where: {
+		status: 'active'
+	}
+});
+		\end{minted}
+		
+		This translates to:
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+SELECT * FROM "users" WHERE status = 'active';
+		\end{minted}
+		
+		Important considerations:
+		\begin{itemize}
+			\item Without limits, this will retrieve ALL matching records
+			\item For large datasets, always implement pagination
+			\item Consider selecting only needed fields
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsection{Understanding Operators}
+	Sequelize provides a powerful set of operators that allow you to create complex queries. These operators are similar to SQL operators but with a more JavaScript-friendly syntax.
+	
+	\subsubsection{Basic Operators}
+	Let's explore the most commonly used operators:
+	
+	
+		Sequelize provides various comparison operators through the \texttt{Op} object:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const { Op } = require('sequelize');
+
+// Greater than
+const expensiveProducts = await Product.findAll({
+	where: {
+		price: {
+			[Op.gt]: 100    // price > 100
+		}
+	}
+});
+
+// Between range
+const midRangeProducts = await Product.findAll({
+	where: {
+		price: {
+			[Op.between]: [20, 100]    // 20 <= price <= 100
+		}
+	}
+});
+
+// In a list
+const specificProducts = await Product.findAll({
+	where: {
+		category: {
+			[Op.in]: ['electronics', 'books', 'games']
+		}
+	}
+});
+		\end{minted}
+		
+		Common operators include:
+		\begin{itemize}
+			\item [Op.eq]: Equal to (=)
+			\item [Op.ne]: Not equal to (!=)
+			\item [Op.gt]: Greater than (>)
+			\item [Op.gte]: Greater than or equal to (>=)
+			\item [Op.lt]: Less than (<)
+			\item [Op.lte]: Less than or equal to (<=)
+			\item [Op.between]: Between two values
+			\item [Op.in]: In a list of values
+			\item [Op.notIn]: Not in a list of values
+		\end{itemize}
+	
+	
+	\subsubsection{Logical Operators}
+	Combining multiple conditions is essential for complex queries:
+	
+	
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const results = await Product.findAll({
+	where: {
+		[Op.and]: [
+		{
+			price: {
+				[Op.gte]: 50
+			}
+		},
+		{
+			category: 'electronics'
+		},
+		{
+			[Op.or]: [
+			{ brand: 'Samsung' },
+			{ brand: 'Apple' }
+			]
+		}
+		]
+	}
+});
+		\end{minted}
+		
+		This creates a SQL query equivalent to:
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+SELECT * FROM products 
+WHERE price >= 50 
+AND category = 'electronics'
+AND (brand = 'Samsung' OR brand = 'Apple');
+		\end{minted}
+		
+		Understanding the structure:
+		\begin{itemize}
+			\item [Op.and]: All conditions must be true
+			\item [Op.or]: At least one condition must be true
+			\item Conditions can be nested for complex logic
+			\item Use parentheses in the code to maintain clarity
+		\end{itemize}
+	
+	\subsubsection{Pattern Matching Operators}
+	When searching text fields, pattern matching is essential:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const searchResults = await Product.findAll({
+	where: {
+		name: {
+			// Case-insensitive search
+			[Op.iLike]: '%phone%'    // PostgreSQL specific
+		},
+		description: {
+			// Regular expression match
+			[Op.regexp]: '\\d{3}-\\d{2}-\\d{4}'
+		}
+	}
+});
+	\end{minted}
+	
+	Key pattern matching operators:
+	\begin{itemize}
+		\item [Op.like]: Case-sensitive pattern match
+		\item [Op.iLike]: Case-insensitive pattern match (PostgreSQL)
+		\item [Op.regexp]: Regular expression match
+		\item [Op.startsWith]: Starts with pattern
+		\item [Op.endsWith]: Ends with pattern
+		\item [Op.substring]: Contains substring
+	\end{itemize}
+	
+	\begin{tcolorbox}[title=Important Note]
+		When using pattern matching:
+		\begin{itemize}
+			\item Consider performance implications on large datasets
+			\item Use indexes appropriately for text search fields
+			\item Consider using full-text search for better performance
+			\item Be cautious with leading wildcards ('%text') as they can't use indexes
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Advanced Querying Techniques}
+	Understanding advanced querying techniques is crucial for building efficient applications. These techniques help you retrieve complex data structures while minimizing database load.
+	
+	\subsection{Eager Loading}
+	One of the most important concepts in Sequelize is eager loading, which helps solve the N+1 query problem. Let's understand what this means and how to use it effectively.
+	
+	\subsubsection{Understanding the N+1 Problem}
+	\begin{tcolorbox}[title=The N+1 Query Problem]
+		Consider this common scenario:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Bad Practice: N+1 Problem
+const posts = await Post.findAll();
+for (const post of posts) {
+	const author = await post.getAuthor();
+	console.log(author.name);
+}
+		\end{minted}
+		
+		This code generates N+1 queries:
+		\begin{itemize}
+			\item 1 query to fetch all posts
+			\item N queries (one for each post) to fetch its author
+		\end{itemize}
+		
+		If you have 100 posts, this generates 101 database queries!
+	\end{tcolorbox}
+	
+	\subsubsection{Basic Eager Loading}
+	
+		Here's how to solve the N+1 problem using eager loading:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+// Good Practice: Single Query with Eager Loading
+const posts = await Post.findAll({
+	include: [{
+		model: User,
+		as: 'author',
+		attributes: ['id', 'name', 'email']
+	}]
+});
+
+// Now you can access author directly
+posts.forEach(post => {
+	console.log(post.author.name);
+});
+		\end{minted}
+		
+		This generates a single SQL query with a JOIN:
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{sql}
+SELECT 
+"Post".*,
+"author"."id" AS "author.id",
+"author"."name" AS "author.name",
+"author"."email" AS "author.email"
+FROM "posts" AS "Post"
+LEFT OUTER JOIN "users" AS "author" 
+ON "Post"."authorId" = "author"."id";
+		\end{minted}
+		
+		Key benefits:
+		\begin{itemize}
+			\item Reduced number of queries
+			\item Better performance
+			\item Less network overhead
+			\item Simpler code
+		\end{itemize}
+	
+	
+	\subsubsection{Nested Eager Loading}
+	Sometimes you need to load multiple levels of related data:
+	
+	
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const orders = await Order.findAll({
+	include: [
+	{
+		model: User,
+		attributes: ['id', 'email'],
+		include: [{
+			model: Address,
+			attributes: ['street', 'city']
+		}]
+	},
+	{
+		model: OrderItem,
+		include: [{
+			model: Product,
+			attributes: ['id', 'name', 'price']
+		}]
+	}
+	]
+});
+		\end{minted}
+		
+		Important considerations:
+		\begin{itemize}
+			\item Deep nesting can lead to complex queries
+			\item Consider performance impact with large datasets
+			\item May need to split into multiple queries for better performance
+			\item Use \texttt{separate: true} for heavy nested relations
+		\end{itemize}
+	
+	
+	\subsection{Attributes and Aggregations}
+	Understanding how to select specific attributes and perform calculations is crucial for optimizing query performance.
+	
+	\subsubsection{Selecting Specific Attributes}
+	\begin{tcolorbox}[title=Optimizing Field Selection]
+		Instead of selecting all fields, choose only what you need:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Bad Practice: Selecting everything
+const users = await User.findAll();
+
+// Good Practice: Select specific fields
+const users = await User.findAll({
+	attributes: [
+	'id', 
+	'email',
+	['firstName', 'name'], // Alias
+	[sequelize.fn('DATE', sequelize.col('createdAt')), 'joinDate']
+	]
+});
+		\end{minted}
+		
+		Benefits of selective attributes:
+		\begin{itemize}
+			\item Reduced data transfer
+			\item Less memory usage
+			\item Improved query performance
+			\item Clearer data structure
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsubsection{Working with Aggregations}
+	Sequelize provides powerful tools for data aggregation:
+	
+	\begin{tcolorbox}[title=Common Aggregation Functions]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Basic aggregation
+const orderStats = await Order.findAll({
+	attributes: [
+	[sequelize.fn('DATE', sequelize.col('createdAt')), 'date'],
+	[sequelize.fn('COUNT', sequelize.col('id')), 'orderCount'],
+	[sequelize.fn('SUM', sequelize.col('totalAmount')), 'revenue']
+	],
+	group: [sequelize.fn('DATE', sequelize.col('createdAt'))]
+});
+
+// Complex aggregations with conditions
+const productStats = await OrderItem.findAll({
+	attributes: [
+	'productId',
+	[sequelize.fn('COUNT', sequelize.col('id')), 'totalOrders'],
+	[sequelize.fn('SUM', sequelize.col('quantity')), 'totalQuantity'],
+	[
+	sequelize.fn(
+	'SUM', 
+	sequelize.literal('quantity * price')
+	), 
+	'totalRevenue'
+	]
+	],
+	include: [{
+		model: Product,
+		attributes: ['name'],
+		required: true
+	}],
+	group: ['productId', 'Product.id', 'Product.name']
+});
+		\end{minted}
+		
+		Common aggregation functions:
+		\begin{itemize}
+			\item COUNT: Count records
+			\item SUM: Sum values
+			\item AVG: Calculate average
+			\item MAX: Find maximum value
+			\item MIN: Find minimum value
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Performance Optimization}
+	Optimizing query performance is crucial for maintaining a responsive application. Let's explore various techniques to improve query efficiency.
+	
+	\subsection{Query Optimization Strategies}
+	
+	\subsubsection{Using Indexes Effectively}
+	\begin{tcolorbox}[title=Index Optimization]
+		Indexes are crucial for query performance:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Define indexes in your model
+const User = sequelize.define('User', {
+	email: {
+		type: DataTypes.STRING,
+		unique: true,  // Creates unique index
+		index: true    // Creates basic index
+	}
+}, {
+	indexes: [
+	{
+		name: 'user_status_role',
+		fields: ['status', 'role']
+	},
+	{
+		name: 'user_email_status',
+		unique: true,
+		fields: ['email', 'status']
+	}
+	]
+});
+		\end{minted}
+		
+		When to use indexes:
+		\begin{itemize}
+			\item Frequently queried fields
+			\item Fields used in WHERE clauses
+			\item Fields used for sorting (ORDER BY)
+			\item Foreign key fields
+			\item Unique constraint fields
+		\end{itemize}
+		
+		Remember:
+		\begin{itemize}
+			\item Indexes improve read performance but slow down writes
+			\item Don't over-index - each index takes space and maintenance
+			\item Consider compound indexes for common query patterns
+			\item Monitor index usage
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsubsection{Implementing Pagination}
+	\begin{tcolorbox}[title=Efficient Pagination]
+		Proper pagination is essential for handling large datasets:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const PAGE_SIZE = 20;
+const page = req.query.page || 1;
+
+// Basic offset pagination
+const products = await Product.findAndCountAll({
+	limit: PAGE_SIZE,
+	offset: (page - 1) * PAGE_SIZE,
+	order: [['createdAt', 'DESC']],
+	attributes: ['id', 'name', 'price'] // Select only needed fields
+});
+
+// Cursor-based pagination (more efficient for large datasets)
+const products = await Product.findAll({
+	where: {
+		createdAt: {
+			[Op.lt]: cursor // timestamp of last item
+		}
+	},
+	limit: PAGE_SIZE,
+	order: [['createdAt', 'DESC']]
+});
+		\end{minted}
+		
+		Pagination best practices:
+		\begin{itemize}
+			\item Use cursor-based pagination for large datasets
+			\item Always include a reasonable page size limit
+			\item Consider caching frequently accessed pages
+			\item Include total count only when necessary
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Transaction Management}
+	Transactions ensure data consistency by grouping multiple database operations into a single unit of work.
+	
+	\subsection{Understanding Transactions}
+	\begin{tcolorbox}[title=Transaction Basics]
+		Transactions follow the ACID principles:
+		\begin{itemize}
+			\item Atomicity: All operations succeed or all fail
+			\item Consistency: Data remains valid
+			\item Isolation: Transactions don't interfere
+			\item Durability: Changes are permanent
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsection{Implementing Transactions}
+	\begin{tcolorbox}[title=Basic Transaction Usage]
+		Here's a typical transaction implementation:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Using async/await with transaction
+const createOrder = async (userId, items) => {
+	// Start transaction
+	const t = await sequelize.transaction();
+	
+	try {
+		// Create order
+		const order = await Order.create({
+			userId,
+			status: 'pending'
+		}, { transaction: t });
+		
+		// Create order items
+		await Promise.all(items.map(item => 
+		OrderItem.create({
+			orderId: order.id,
+			productId: item.productId,
+			quantity: item.quantity
+		}, { transaction: t })
+		));
+		
+		// Update product stock
+		await Promise.all(items.map(item =>
+		Product.decrement('stock', {
+			by: item.quantity,
+			where: { id: item.productId },
+			transaction: t
+		})
+		));
+		
+		// Commit transaction
+		await t.commit();
+		return order;
+	} catch (error) {
+		// Rollback on error
+		await t.rollback();
+		throw error;
+	}
+};
+		\end{minted}
+		
+		Key points:
+		\begin{itemize}
+			\item Always use try-catch blocks
+			\item Remember to commit or rollback
+			\item Pass transaction object to all operations
+			\item Consider isolation levels
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Best Practices}
+	
+	\subsection{Query Optimization Checklist}
+	\begin{itemize}
+		\item Select only needed fields
+		\item Use appropriate indexes
+		\item Implement proper pagination
+		\item Use eager loading to avoid N+1 queries
+		\item Consider using raw queries for complex operations
+		\item Monitor query performance
+		\item Use transactions for data consistency
+	\end{itemize}
+	
+	\subsection{Performance Monitoring}
+	\begin{tcolorbox}[title=Monitoring Query Performance]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Log slow queries
+const sequelize = new Sequelize(config, {
+	benchmark: true,
+	logging: (sql, timing) => {
+		if (timing > 1000) { // Queries taking > 1 second
+			console.warn(`Slow query (${timing}ms):`, sql);
+		}
+	}
+});
+
+// Analyze query plans
+const analyzePlan = async () => {
+	const [plan] = await sequelize.query(`
+	EXPLAIN ANALYZE
+	SELECT * FROM users
+	JOIN orders ON users.id = orders.user_id
+	WHERE users.status = 'active'
+	`);
+	console.log(plan);
+};
+		\end{minted}
+	\end{tcolorbox}
+	
+	\section{Summary}
+	In this chapter, we covered:
+	\begin{itemize}
+		\item Understanding and using basic queries
+		\item Advanced querying techniques
+		\item Performance optimization strategies
+		\item Transaction management
+		\item Best practices and monitoring
+	\end{itemize}
+	
+	\chapter{Advanced Query Optimization Techniques}
+	
+	\section{Introduction}
+	This chapter delves deeper into advanced query optimization techniques in Sequelize. We'll explore complex queries, performance tuning, and scalability considerations that become crucial as your application grows.
+	
+	\section{Complex Query Patterns}
+	
+	\subsection{Subqueries}
+	Subqueries allow you to nest one query within another. Understanding how to use them effectively is crucial for complex data operations.
+	
+	\subsubsection{Using Subqueries in WHERE Clauses}
+	\begin{tcolorbox}[title=Subquery Examples]
+		Here's how to use subqueries effectively:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Find users who have placed orders over $1000
+const users = await User.findAll({
+	where: {
+		id: {
+			[Op.in]: sequelize.literal(`(
+			SELECT DISTINCT "userId"
+			FROM "Orders"
+			WHERE "totalAmount" > 1000
+			)`)
+		}
+	}
+});
+
+// More readable alternative using include
+const users = await User.findAll({
+	include: [{
+		model: Order,
+		where: {
+			totalAmount: {
+				[Op.gt]: 1000
+			}
+		},
+		required: true,
+		attributes: []  // Don't select Order fields
+	}]
+});
+		\end{minted}
+		
+		Key considerations:
+		\begin{itemize}
+			\item Use \texttt{sequelize.literal} carefully (risk of SQL injection)
+			\item Consider using includes when possible
+			\item Understand performance implications
+			\item Use indexes on joined fields
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsubsection{Correlated Subqueries}
+	\begin{tcolorbox}[title=Correlated Subqueries]
+		Subqueries that reference the outer query:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Find products with above-average price in their category
+const products = await Product.findAll({
+	where: {
+		price: {
+			[Op.gt]: sequelize.literal(`(
+			SELECT AVG(price)
+			FROM "Products" AS p2
+			WHERE p2."categoryId" = "Product"."categoryId"
+			)`)
+		}
+	},
+	include: [{
+		model: Category,
+		attributes: ['name']
+	}]
+});
+		\end{minted}
+		
+		When to use:
+		\begin{itemize}
+			\item Comparing against aggregated values
+			\item Finding records relative to their group
+			\item Complex filtering conditions
+		\end{itemize}
+		
+		Performance tips:
+		\begin{itemize}
+			\item Use indexes on compared columns
+			\item Consider materializing frequently used calculations
+			\item Monitor query execution time
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Advanced Joins and Relationships}
+	
+	\subsection{Complex Join Operations}
+	Understanding how to handle complex joins efficiently is crucial for large applications.
+	
+	\subsubsection{Multiple Join Types}
+	\begin{tcolorbox}[title=Different Join Types]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Inner Join (default with required: true)
+const results = await Order.findAll({
+	include: [{
+		model: User,
+		required: true  // INNER JOIN
+	}]
+});
+
+// Left Outer Join (default)
+const results = await Order.findAll({
+	include: [{
+		model: User,
+		required: false  // LEFT OUTER JOIN
+	}]
+});
+
+// Right Join (using literal SQL)
+const results = await sequelize.query(`
+SELECT "Orders".*, "Users".*
+FROM "Orders"
+RIGHT JOIN "Users" ON "Orders"."userId" = "Users"."id"
+`, {
+	type: QueryTypes.SELECT,
+	model: Order,
+	include: [User]
+});
+		\end{minted}
+		
+		Understanding join types:
+		\begin{itemize}
+			\item INNER JOIN: Only matching records
+			\item LEFT JOIN: All records from left table
+			\item RIGHT JOIN: All records from right table
+			\item FULL JOIN: All records from both tables
+		\end{itemize}
+		
+		When to use each:
+		\begin{itemize}
+			\item INNER JOIN: When you need data from both tables
+			\item LEFT JOIN: When you want all records from main table
+			\item RIGHT JOIN: Rarely used, prefer LEFT JOIN
+			\item FULL JOIN: When you need all possible combinations
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsection{Advanced Association Patterns}
+	
+	\subsubsection{Polymorphic Associations}
+	\begin{tcolorbox}[title=Implementing Polymorphic Associations]
+		Handling relationships where a model can belong to multiple types:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Comment can belong to either Post or Image
+const Comment = sequelize.define('Comment', {
+	content: DataTypes.TEXT,
+	commentableId: DataTypes.INTEGER,
+	commentableType: DataTypes.STRING
+});
+
+const Post = sequelize.define('Post', {
+	title: DataTypes.STRING,
+	content: DataTypes.TEXT
+});
+
+const Image = sequelize.define('Image', {
+	url: DataTypes.STRING,
+	caption: DataTypes.STRING
+});
+
+// Helper function to get comments
+Post.prototype.getComments = function() {
+	return Comment.findAll({
+		where: {
+			commentableId: this.id,
+			commentableType: 'Post'
+		}
+	});
+};
+
+Image.prototype.getComments = function() {
+	return Comment.findAll({
+		where: {
+			commentableId: this.id,
+			commentableType: 'Image'
+		}
+	});
+};
+		\end{minted}
+		
+		Important considerations:
+		\begin{itemize}
+			\item Index both commentableId and commentableType
+			\item Consider using a discriminator pattern
+			\item Handle cascading deletes carefully
+			\item Maintain data integrity
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Query Performance Optimization}
+	
+	\subsection{Query Planning and Analysis}
+	
+	\subsubsection{Understanding Query Plans}
+	\begin{tcolorbox}[title=Analyzing Query Execution]
+		Use EXPLAIN ANALYZE to understand query performance:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const analyzeQuery = async () => {
+	const [analysis] = await sequelize.query(`
+	EXPLAIN ANALYZE
+	SELECT "Users".*, COUNT("Orders"."id") as "orderCount"
+	FROM "Users"
+	LEFT JOIN "Orders" ON "Users"."id" = "Orders"."userId"
+	GROUP BY "Users"."id"
+	`);
+	
+	console.log(analysis);
+};
+		\end{minted}
+		
+		Key metrics to analyze:
+		\begin{itemize}
+			\item Scan type (Sequential vs Index)
+			\item Execution time
+			\item Number of rows examined
+			\item Join strategies used
+		\end{itemize}
+		
+		Optimization strategies:
+		\begin{itemize}
+			\item Add appropriate indexes
+			\item Rewrite queries to use indexes
+			\item Consider materialized views
+			\item Optimize JOIN conditions
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsection{Caching Strategies}
+	
+	\subsubsection{Query Result Caching}
+	\begin{tcolorbox}[title=Implementing Caching]
+		Using Redis for query caching:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const Redis = require('ioredis');
+const redis = new Redis();
+
+const getCachedUsers = async () => {
+	const cacheKey = 'users:active';
+	
+	// Try to get from cache
+	let users = await redis.get(cacheKey);
+	
+	if (users) {
+		return JSON.parse(users);
+	}
+	
+	// If not in cache, query database
+	users = await User.findAll({
+		where: { status: 'active' },
+		include: [{
+			model: Profile,
+			attributes: ['avatar']
+		}]
+	});
+	
+	// Cache the result
+	await redis.setex(cacheKey, 3600, JSON.stringify(users));
+	
+	return users;
+};
+		\end{minted}
+		
+		Caching considerations:
+		\begin{itemize}
+			\item Choose appropriate cache duration
+			\item Handle cache invalidation
+			\item Consider memory usage
+			\item Monitor cache hit rates
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Database Scaling Strategies}
+	
+	\subsection{Read Replicas}
+	\begin{tcolorbox}[title=Configuring Read Replicas]
+		Setting up read replicas in Sequelize:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const sequelize = new Sequelize({
+	dialect: 'postgres',
+	replication: {
+		read: [
+		{ host: 'read-replica-1', username: '...', password: '...' },
+		{ host: 'read-replica-2', username: '...', password: '...' }
+		],
+		write: { host: 'master', username: '...', password: '...' }
+	}
+});
+
+// Queries automatically use read replicas
+const users = await User.findAll();  // Uses read replica
+
+// Force master for critical reads
+const user = await User.findByPk(id, {
+	useMaster: true
+});
+		\end{minted}
+		
+		Best practices:
+		\begin{itemize}
+			\item Use read replicas for heavy read operations
+			\item Monitor replication lag
+			\item Handle eventual consistency
+			\item Implement proper failover
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Performance Monitoring}
+	
+	\subsection{Query Monitoring}
+	\begin{tcolorbox}[title=Implementing Query Monitoring]
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const sequelize = new Sequelize(config, {
+	benchmark: true,
+	logging: (sql, timing) => {
+		// Log slow queries
+		if (timing > 1000) {
+			console.warn(`Slow query (${timing}ms):`, sql);
+			
+			// Send to monitoring service
+			monitor.trackQuery({
+				sql,
+				timing,
+				timestamp: new Date()
+			});
+		}
+		
+		// Track query patterns
+		const queryType = getQueryType(sql);
+		metrics.incrementCounter(`query.${queryType}`);
+	}
+});
+
+// Custom query logger
+const QueryLogger = {
+	logQuery: async (sql, timing) => {
+		await QueryLog.create({
+			sql,
+			executionTime: timing,
+			timestamp: new Date()
+		});
+	}
+};
+		\end{minted}
+		
+		Monitoring metrics:
+		\begin{itemize}
+			\item Query execution time
+			\item Query patterns and frequency
+			\item Slow query analysis
+			\item Resource utilization
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Best Practices}
+	
+	\subsection{Query Optimization Checklist}
+	\begin{itemize}
+		\item Profile queries before optimization
+		\item Use appropriate indexes
+		\item Implement caching where appropriate
+		\item Monitor query performance
+		\item Use read replicas for heavy read operations
+		\item Implement proper error handling
+		\item Regular maintenance and monitoring
+	\end{itemize}
+	
+	\section{Summary}
+	In this chapter, we covered:
+	\begin{itemize}
+		\item Complex query patterns
+		\item Advanced joins and relationships
+		\item Query performance optimization
+		\item Database scaling strategies
+		\item Performance monitoring
+	\end{itemize}
+	
+	\chapter{Database Migrations and Schema Management}
+	
+	\section{Introduction}
+	Database migrations are essential for managing schema changes in a versioned and organized way. This chapter covers how to effectively manage database schema evolution using Sequelize migrations.
+	
+	\section{Understanding Migrations}
+	
+	\subsection{What Are Migrations?}
+	\begin{tcolorbox}[title=Migration Basics]
+		Migrations are like version control for your database schema. They allow you to:
+		\begin{itemize}
+			\item Track database changes
+			\item Share schema changes with team members
+			\item Roll back changes when needed
+			\item Maintain data integrity during updates
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsection{Setting Up Migrations}
+	
+	\subsubsection{Initial Setup}
+	\begin{tcolorbox}[title=Migration Configuration]
+		First, install the Sequelize CLI:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+npm install --save-dev sequelize-cli
+		\end{minted}
+		
+		Create a configuration file (\texttt{.sequelizerc}):
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+const path = require('path');
+
+module.exports = {
+	'config': path.resolve('config', 'database.js'),
+	'models-path': path.resolve('models'),
+	'seeders-path': path.resolve('seeders'),
+	'migrations-path': path.resolve('migrations')
+};
+		\end{minted}
+		
+		Initialize Sequelize project structure:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+npx sequelize-cli init
+		\end{minted}
+		
+		This creates:
+		\begin{itemize}
+			\item \texttt{config/database.js} - Database configuration
+			\item \texttt{models/} - Model definitions
+			\item \texttt{migrations/} - Migration files
+			\item \texttt{seeders/} - Seed data files
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\section{Creating Migrations}
+	
+	\subsection{Basic Migration Operations}
+	
+	\subsubsection{Creating Tables}
+	\begin{tcolorbox}[title=Table Creation Migration]
+		Generate a new migration:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+npx sequelize-cli migration:generate --name create-users-table
+		\end{minted}
+		
+		Implement the migration:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+module.exports = {
+	async up(queryInterface, Sequelize) {
+		await queryInterface.createTable('Users', {
+			id: {
+				type: Sequelize.UUID,
+				defaultValue: Sequelize.UUIDV4,
+				primaryKey: true
+			},
+			email: {
+				type: Sequelize.STRING,
+				allowNull: false,
+				unique: true
+			},
+			password: {
+				type: Sequelize.STRING,
+				allowNull: false
+			},
+			status: {
+				type: Sequelize.ENUM('active', 'inactive'),
+				defaultValue: 'active'
+			},
+			createdAt: {
+				type: Sequelize.DATE,
+				allowNull: false
+			},
+			updatedAt: {
+				type: Sequelize.DATE,
+				allowNull: false
+			}
+		}, {
+			indexes: [
+			{
+				name: 'users_email_status_idx',
+				fields: ['email', 'status']
+			}
+			]
+		});
+	},
+	
+	async down(queryInterface, Sequelize) {
+		await queryInterface.dropTable('Users');
+	}
+};
+		\end{minted}
+		
+		Key concepts:
+		\begin{itemize}
+			\item \texttt{up} method defines changes to apply
+			\item \texttt{down} method defines how to revert changes
+			\item Always include timestamps (\texttt{createdAt}, \texttt{updatedAt})
+			\item Consider indexes during table creation
+		\end{itemize}
+	\end{tcolorbox}
+	
+	\subsubsection{Modifying Tables}
+	\begin{tcolorbox}[title=Table Modification Migration]
+		Adding columns:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+module.exports = {
+	async up(queryInterface, Sequelize) {
+		// Add new column
+		await queryInterface.addColumn('Users', 'lastName', {
+			type: Sequelize.STRING,
+			allowNull: true,
+			after: 'firstName'  // Position the column
+		});
+		
+		// Add multiple columns
+		await queryInterface.addColumns('Users', {
+			phoneNumber: {
+				type: Sequelize.STRING,
+				allowNull: true
+			},
+			dateOfBirth: {
+				type: Sequelize.DATE,
+				allowNull: true
+			}
+		});
+	},
+	
+	async down(queryInterface, Sequelize) {
+		// Remove columns in reverse order
+		await queryInterface.removeColumn('Users', 'dateOfBirth');
+		await queryInterface.removeColumn('Users', 'phoneNumber');
+		await queryInterface.removeColumn('Users', 'lastName');
+	}
+};
+		\end{minted}
+		
+		Modifying columns:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+module.exports = {
+	async up(queryInterface, Sequelize) {
+		await queryInterface.changeColumn('Users', 'email', {
+			type: Sequelize.STRING(100),
+			allowNull: false,
+			unique: true,
+			validate: {
+				isEmail: true
+			}
+		});
+	},
+	
+	async down(queryInterface, Sequelize) {
+		await queryInterface.changeColumn('Users', 'email', {
+			type: Sequelize.STRING,
+			allowNull: true,
+			unique: false
+		});
+	}
+};
+		\end{minted}
+	\end{tcolorbox}
+	
+	\subsection{Advanced Migration Patterns}
+	
+	\subsubsection{Data Migrations}
+		Migrating and transforming data:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+module.exports = {
+	async up(queryInterface, Sequelize) {
+		// Create temporary column
+		await queryInterface.addColumn('Users', 'fullName', {
+			type: Sequelize.STRING
+		});
+		
+		// Update data
+		await queryInterface.sequelize.query(`
+		UPDATE "Users"
+		SET "fullName" = CONCAT("firstName", ' ', "lastName")
+		WHERE "firstName" IS NOT NULL
+		AND "lastName" IS NOT NULL
+		`);
+		
+		// Remove old columns
+		await queryInterface.removeColumn('Users', 'firstName');
+		await queryInterface.removeColumn('Users', 'lastName');
+	},
+	
+	async down(queryInterface, Sequelize) {
+		// Restore original structure
+		await queryInterface.addColumn('Users', 'firstName', {
+			type: Sequelize.STRING
+		});
+		await queryInterface.addColumn('Users', 'lastName', {
+			type: Sequelize.STRING
+		});
+		
+		// Split data back
+		await queryInterface.sequelize.query(`
+		UPDATE "Users"
+		SET 
+		"firstName" = SPLIT_PART("fullName", ' ', 1),
+		"lastName" = SPLIT_PART("fullName", ' ', 2)
+		WHERE "fullName" IS NOT NULL
+		`);
+		
+		// Remove temporary column
+		await queryInterface.removeColumn('Users', 'fullName');
+	}
+};
+		\end{minted}
+		
+		Important considerations:
+		\begin{itemize}
+			\item Handle large datasets in batches
+			\item Consider data integrity
+			\item Plan for rollback scenarios
+			\item Test with representative data
+		\end{itemize}
+	
+	\section{Migration Best Practices}
+	
+	\subsection{Planning Migrations}
+	\begin{tcolorbox}[title=Migration Guidelines]
+		Key principles:
+		\begin{itemize}
+			\item Make migrations atomic and focused
+			\item Test migrations thoroughly
+			\item Include proper rollback logic
+			\item Document complex migrations
+			\item Consider performance impact
+		\end{itemize}
+		
+		Example checklist:
+		\begin{enumerate}
+			\item Backup database before migration
+			\item Test migration on staging
+			\item Plan deployment window
+			\item Prepare rollback strategy
+			\item Monitor system during migration
+		\end{enumerate}
+	\end{tcolorbox}
+	
+	\subsection{Zero-Downtime Migrations}
+		Example of adding a non-nullable column:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Step 1: Add nullable column
+module.exports = {
+	async up(queryInterface, Sequelize) {
+		await queryInterface.addColumn('Users', 'role', {
+			type: Sequelize.STRING,
+			allowNull: true
+		});
+	},
+	async down(queryInterface, Sequelize) {
+		await queryInterface.removeColumn('Users', 'role');
+	}
+};
+
+// Step 2: Set default values
+module.exports = {
+	async up(queryInterface, Sequelize) {
+		await queryInterface.sequelize.query(`
+		UPDATE "Users"
+		SET role = 'user'
+		WHERE role IS NULL
+		`);
+	},
+	async down(queryInterface, Sequelize) {
+		await queryInterface.sequelize.query(`
+		UPDATE "Users"
+		SET role = NULL
+		`);
+	}
+};
+
+// Step 3: Make column non-nullable
+module.exports = {
+	async up(queryInterface, Sequelize) {
+		await queryInterface.changeColumn('Users', 'role', {
+			type: Sequelize.STRING,
+			allowNull: false
+		});
+	},
+	async down(queryInterface, Sequelize) {
+		await queryInterface.changeColumn('Users', 'role', {
+			type: Sequelize.STRING,
+			allowNull: true
+		});
+	}
+};
+		\end{minted}
+		
+		Best practices:
+		\begin{itemize}
+			\item Break changes into smaller steps
+			\item Maintain backward compatibility
+			\item Use feature flags when possible
+			\item Monitor database performance
+		\end{itemize}
+	
+	\section{Schema Version Control}
+	
+	\subsection{Managing Migration History}
+	\begin{tcolorbox}[title=Migration Management]
+		Running migrations:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+# Run all pending migrations
+npx sequelize-cli db:migrate
+
+# Undo last migration
+npx sequelize-cli db:migrate:undo
+
+# Undo all migrations
+npx sequelize-cli db:migrate:undo:all
+
+# Run migrations up to a specific one
+npx sequelize-cli db:migrate --to XXXXXX-migration-name.js
+		\end{minted}
+		
+		Checking status:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{bash}
+# View pending migrations
+npx sequelize-cli db:migrate:status
+		\end{minted}
+	\end{tcolorbox}
+	
+	
+	\section{Summary}
+	Key takeaways:
+	\begin{itemize}
+		\item Migration fundamentals
+		\item Best practices for schema changes
+		\item Zero-downtime migration patterns
+		\item Version control strategies
+	\end{itemize}
+	
+	
+	\chapter{Advanced Model Patterns and Data Validation}
+	
+	\section{Introduction}
+	This chapter explores advanced patterns for model design, complex validation scenarios, and sophisticated data handling techniques using Sequelize.
+	
+	\section{Advanced Model Patterns}
+	
+	\subsection{Model Inheritance}
+	Model inheritance allows you to share common attributes and methods between models.
+	
+	\subsubsection{Single Table Inheritance}
+		Example of a content management system:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Base Content model
+class Content extends Model {
+	static init(sequelize) {
+		return super.init({
+			id: {
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
+				primaryKey: true
+			},
+			title: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			type: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			content: {
+				type: DataTypes.TEXT
+			},
+			metadata: {
+				type: DataTypes.JSONB,
+				defaultValue: {}
+			}
+		}, {
+			sequelize,
+			tableName: 'contents',
+			discriminator: 'type'
+		});
+	}
+	
+	static includeOptions() {
+		return {};
+	}
+}
+
+// Article model extending Content
+class Article extends Content {
+	static init(sequelize) {
+		super.init(sequelize);
+		this.addHook('beforeCreate', (instance) => {
+			instance.type = 'article';
+		});
+		return this;
+	}
+	
+	static includeOptions() {
+		return {
+			...super.includeOptions(),
+			where: { type: 'article' }
+		};
+	}
+	
+	get excerpt() {
+		return this.content.substring(0, 150) + '...';
+	}
+}
+
+// Video model extending Content
+class Video extends Content {
+	static init(sequelize) {
+		super.init(sequelize);
+		this.addHook('beforeCreate', (instance) => {
+			instance.type = 'video';
+		});
+		return this;
+	}
+	
+	static includeOptions() {
+		return {
+			...super.includeOptions(),
+			where: { type: 'video' }
+		};
+	}
+	
+	get duration() {
+		return this.metadata.duration || 0;
+	}
+}
+		\end{minted}
+		
+		Usage:
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Create different content types
+const article = await Article.create({
+	title: 'Understanding STI',
+	content: 'Single Table Inheritance...'
+});
+
+const video = await Video.create({
+	title: 'STI Tutorial',
+	content: 'Video description',
+	metadata: { duration: 360 }
+});
+
+// Query specific content types
+const articles = await Article.findAll();
+const videos = await Video.findAll();
+		\end{minted}
+		
+		Key concepts:
+		\begin{itemize}
+			\item Use discriminator column to differentiate types
+			\item Share common attributes in base model
+			\item Extend functionality in child models
+			\item Maintain type-specific behavior
+		\end{itemize}
+	
+	\subsection{Model Mixins}
+		Example of a timestamped soft-delete mixin:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Soft Delete Mixin
+const SoftDeleteMixin = {
+	addSoftDelete(Model) {
+		Model.addHook('beforeFind', (options) => {
+			if (!options.withDeleted) {
+				options.where = {
+					...options.where,
+					deletedAt: null
+				};
+			}
+		});
+		
+		Model.prototype.softDelete = async function() {
+			this.deletedAt = new Date();
+			await this.save();
+		};
+		
+		Model.prototype.restore = async function() {
+			this.deletedAt = null;
+			await this.save();
+		};
+		
+		Model.withDeleted = function(options = {}) {
+			return this.findAll({
+				...options,
+				withDeleted: true
+			});
+		};
+		
+		return Model;
+	}
+};
+
+// Timestamp Mixin
+const TimestampMixin = {
+	addTimestamps(Model) {
+		Model.addHook('beforeCreate', (instance) => {
+			instance.createdAt = new Date();
+			instance.updatedAt = new Date();
+		});
+		
+		Model.addHook('beforeUpdate', (instance) => {
+			instance.updatedAt = new Date();
+		});
+		
+		return Model;
+	}
+};
+
+// Using mixins
+class User extends Model {
+	static init(sequelize) {
+		super.init({
+			// Model attributes
+		}, { sequelize });
+		
+		SoftDeleteMixin.addSoftDelete(this);
+		TimestampMixin.addTimestamps(this);
+		return this;
+	}
+}
+		\end{minted}
+		
+		Usage:
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// Regular operations
+const user = await User.findByPk(1);
+await user.softDelete();
+
+// Find including deleted
+const allUsers = await User.withDeleted();
+
+// Restore deleted user
+await user.restore();
+		\end{minted}
+	
+	\section{Advanced Validation}
+	
+	\subsection{Custom Validators}
+		Example of custom validation rules:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+class Order extends Model {
+	static init(sequelize) {
+		return super.init({
+			items: {
+				type: DataTypes.JSONB,
+				validate: {
+					isValidItems(value) {
+						if (!Array.isArray(value)) {
+							throw new Error('Items must be an array');
+						}
+						
+						if (value.length === 0) {
+							throw new Error('Order must contain at least one item');
+						}
+						
+						const invalidItems = value.filter(item => 
+						!item.productId || 
+						!item.quantity || 
+						item.quantity <= 0
+						);
+						
+						if (invalidItems.length > 0) {
+							throw new Error('Invalid items in order');
+						}
+					}
+				}
+			},
+			deliveryAddress: {
+				type: DataTypes.JSONB,
+				validate: {
+					async isValidAddress(value) {
+						if (!value.street || !value.city || !value.country) {
+							throw new Error('Incomplete address');
+						}
+						
+						// Example: Validate postal code format based on country
+						const postalCodeFormats = {
+							US: /^\d{5}(-\d{4})?$/,
+							UK: /^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/
+						};
+						
+						const format = postalCodeFormats[value.country];
+						if (format && !format.test(value.postalCode)) {
+							throw new Error('Invalid postal code format');
+						}
+						
+						// Example: External API validation
+						try {
+							const isValid = await validateAddressWithAPI(value);
+							if (!isValid) {
+								throw new Error('Invalid address');
+							}
+						} catch (error) {
+							throw new Error('Address validation failed');
+						}
+					}
+				}
+			},
+			status: {
+				type: DataTypes.STRING,
+				validate: {
+					isIn: {
+						args: [['pending', 'processing', 'shipped', 'delivered']],
+						msg: 'Invalid order status'
+					},
+					async isValidStatusTransition(value) {
+						if (this.changed('status')) {
+							const validTransitions = {
+								pending: ['processing'],
+								processing: ['shipped'],
+								shipped: ['delivered'],
+								delivered: []
+							};
+							
+							const oldStatus = this.previous('status');
+							const allowedStatuses = validTransitions[oldStatus] || [];
+							
+							if (!allowedStatuses.includes(value)) {
+								throw new Error(`Cannot transition from ${oldStatus} to ${value}`);
+							}
+						}
+					}
+				}
+			}
+		}, {
+			sequelize,
+			hooks: {
+				beforeValidate: async (order) => {
+					// Additional validation logic
+				}
+			}
+		});
+	}
+}
+	\end{minted}
+	
+	\subsection{Context-Aware Validation}
+	
+		Example of validation that depends on context:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+class Product extends Model {
+	static init(sequelize) {
+		return super.init({
+			price: {
+				type: DataTypes.DECIMAL(10, 2),
+				validate: {
+					async isPriceValid(value) {
+						// Different validation based on product type
+						if (this.type === 'subscription') {
+							if (value < 0) {
+								throw new Error('Subscription price cannot be negative');
+							}
+						} else {
+							if (value <= 0) {
+								throw new Error('Product price must be positive');
+							}
+						}
+						
+						// Price change validation
+						if (this.changed('price')) {
+							const maxChange = this.type === 'subscription' ? 0.2 : 0.5;
+							const oldPrice = this.previous('price');
+							
+							if (oldPrice) {
+								const changePercent = Math.abs(value - oldPrice) / oldPrice;
+								if (changePercent > maxChange) {
+									throw new Error(
+									`Price change cannot exceed ${maxChange * 100}%`
+									);
+								}
+							}
+						}
+					}
+				}
+			},
+			stock: {
+				type: DataTypes.INTEGER,
+				validate: {
+					async isStockValid(value) {
+						// Skip stock validation for digital products
+						if (this.type === 'digital') {
+							return;
+						}
+						
+						if (value < 0) {
+							throw new Error('Stock cannot be negative');
+						}
+						
+						// Validate against pending orders
+						const pendingOrdersCount = await OrderItem.sum('quantity', {
+							where: {
+								productId: this.id,
+								status: 'pending'
+							}
+						});
+						
+						if (value < pendingOrdersCount) {
+							throw new Error(
+							'Stock cannot be less than pending order quantities'
+							);
+						}
+					}
+				}
+			}
+		}, { sequelize });
+	}
+}
+	\end{minted}
+	
+	
+	\section{Model Hooks}
+	
+	\subsection{Advanced Hook Patterns}
+		Example of sophisticated hook usage:
+		
+		\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+class Order extends Model {
+	static init(sequelize) {
+		return super.init({
+			// ... attributes
+		}, {
+			hooks: {
+				// Validate complex business rules
+				beforeValidate: async (order) => {
+					if (order.isNewRecord) {
+						await validateUserPurchaseLimit(order);
+					}
+				},
+				
+				// Ensure data consistency
+				beforeCreate: async (order) => {
+					await lockInventory(order);
+				},
+				
+				// Handle side effects
+				afterCreate: async (order) => {
+					await Promise.all([
+					updateUserPurchaseHistory(order),
+					sendOrderNotifications(order),
+					updateInventoryStats(order)
+					]);
+				},
+				
+				// Cleanup on failure
+				afterCreate: async (order, options) => {
+					if (options.transaction) {
+						options.transaction.afterCommit(() => {
+							processOrderSuccess(order);
+						});
+					}
+				},
+				
+				// Validate status transitions
+				beforeUpdate: async (order) => {
+					if (order.changed('status')) {
+						await validateStatusTransition(order);
+					}
+				},
+				
+				// Handle cascading updates
+				afterUpdate: async (order) => {
+					if (order.changed('status')) {
+						await updateRelatedRecords(order);
+					}
+				}
+			}
+		});
+	}
+}
+
+// Helper functions
+async function validateUserPurchaseLimit(order) {
+	const user = await order.getUser();
+	const monthlyOrders = await Order.sum('totalAmount', {
+		where: {
+			userId: user.id,
+			createdAt: {
+				[Op.gte]: moment().startOf('month').toDate()
+			}
+		}
+	});
+	
+	if (monthlyOrders + order.totalAmount > user.monthlyLimit) {
+		throw new Error('Monthly purchase limit exceeded');
+	}
+}
+
+async function lockInventory(order) {
+	const items = await order.getItems();
+	
+	for (const item of items) {
+		const product = await item.getProduct();
+		
+		if (product.stock < item.quantity) {
+			throw new Error(`Insufficient stock for ${product.name}`);
+		}
+		
+		await product.decrement('stock', {
+			by: item.quantity,
+			lock: true
+		});
+	}
+}
+
+async function validateStatusTransition(order) {
+	const validTransitions = {
+		pending: ['processing', 'cancelled'],
+		processing: ['shipped', 'cancelled'],
+		shipped: ['delivered'],
+		delivered: [],
+		cancelled: []
+	};
+	
+	const oldStatus = order.previous('status');
+	const newStatus = order.get('status');
+	
+	if (!validTransitions[oldStatus].includes(newStatus)) {
+		throw new Error(
+		`Invalid status transition from ${oldStatus} to ${newStatus}`
+		);
+	}
+}
+	\end{minted}
+	
+	\section{Best Practices}
+	
+	\subsection{Model Organization}
+	\begin{itemize}
+		\item Separate business logic into services
+		\item Use mixins for shared functionality
+		\item Implement proper error handling
+		\item Document complex validation rules
+		\item Test edge cases thoroughly
+	\end{itemize}
+	
+	\section{Summary}
+	Key takeaways:
+	\begin{itemize}
+		\item Advanced model patterns
+		\item Complex validation strategies
+		\item Sophisticated hook implementations
+		\item Best practices for model organization
+	\end{itemize}
+	
+	\chapter{Deployment and Production Considerations}
+	
+	\section{Introduction}
+	Deploying a Sequelize application to production requires careful planning and consideration of various factors including performance, security, and maintainability. This chapter covers essential aspects of deployment and production management.
+	
+	\section{Production Configuration}
+	
+	\subsection{Environment Setup}
+	Proper configuration for production environments:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// config/database.js
+require('dotenv').config();
+
+module.exports = {
+	production: {
+		dialect: 'postgres',
+		host: process.env.DB_HOST,
+		database: process.env.DB_NAME,
+		username: process.env.DB_USER,
+		password: process.env.DB_PASSWORD,
+		pool: {
+			max: parseInt(process.env.DB_POOL_MAX || '10'),
+			min: parseInt(process.env.DB_POOL_MIN || '2'),
+			acquire: 30000,
+			idle: 10000
+		},
+		dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false
+			},
+			keepAlive: true
+		},
+		logging: false, // Disable SQL logging in production
+		benchmark: true // Enable query timing
+	}
+};
+
+// src/database.js
+const { Sequelize } = require('sequelize');
+const config = require('../config/database');
+
+const env = process.env.NODE_ENV || 'development';
+const dbConfig = config[env];
+
+const sequelize = new Sequelize({
+	...dbConfig,
+	define: {
+		timestamps: true,
+		underscored: true,
+		paranoid: true // Enable soft deletes globally
+	},
+	hooks: {
+		beforeConnect: async (config) => {
+			console.log('Connecting to database...');
+		},
+		afterConnect: async (connection) => {
+			console.log('Database connected successfully');
+		}
+	}
+});
+
+module.exports = sequelize;
+	\end{minted}
+	
+	\subsection{Connection Management}
+	Implementing robust connection handling:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// src/database/connectionManager.js
+class DatabaseConnectionManager {
+	constructor(sequelize) {
+		this.sequelize = sequelize;
+		this.maxRetries = 5;
+		this.retryDelay = 5000;
+	}
+	
+	async connect() {
+		let retries = 0;
+		
+		while (retries < this.maxRetries) {
+			try {
+				await this.sequelize.authenticate();
+				console.log('Database connection established');
+				return true;
+			} catch (error) {
+				retries++;
+				console.error(
+				`Failed to connect to database (attempt ${retries}/${this.maxRetries}):`,
+				error.message
+				);
+				
+				if (retries === this.maxRetries) {
+					throw new Error('Failed to connect to database');
+				}
+				
+				await new Promise(resolve => 
+				setTimeout(resolve, this.retryDelay)
+				);
+			}
+		}
+	}
+	
+	async healthCheck() {
+		try {
+			await this.sequelize.query('SELECT 1');
+			return true;
+		} catch (error) {
+			console.error('Database health check failed:', error);
+			return false;
+		}
+	}
+}
+	\end{minted}
+	
+	\section{Performance Optimization}
+	
+	\subsection{Query Optimization}
+	Implementing query optimization strategies:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// src/services/queryOptimizer.js
+class QueryOptimizer {
+	static async findWithPagination(model, options = {}) {
+		const {
+			page = 1,
+			pageSize = 20,
+			order = [['createdAt', 'DESC']],
+			...queryOptions
+		} = options;
+		
+		const offset = (page - 1) * pageSize;
+		
+		// Use separate count query for better performance
+		const [count, rows] = await Promise.all([
+		model.count({ where: queryOptions.where }),
+		model.findAll({
+			...queryOptions,
+			limit: pageSize,
+			offset,
+			order
+		})
+		]);
+		
+		return {
+			rows,
+			pagination: {
+				page,
+				pageSize,
+				totalPages: Math.ceil(count / pageSize),
+				totalItems: count
+			}
+		};
+	}
+	
+	static createQueryLoggingInterceptor() {
+		return {
+			async before(options) {
+				options._startTime = Date.now();
+			},
+			async after(options) {
+				const duration = Date.now() - options._startTime;
+				if (duration > 1000) { // Log slow queries
+					console.warn(`Slow query (${duration}ms):`, options.sql);
+				}
+			}
+		};
+	}
+}
+	\end{minted}
+	
+	\section{Monitoring and Logging}
+	
+	\subsection{Implementing Monitoring}
+	Setting up comprehensive monitoring:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// src/monitoring/databaseMonitor.js
+class DatabaseMonitor {
+	constructor(sequelize) {
+		this.sequelize = sequelize;
+		this.metrics = {
+			queries: {
+				total: 0,
+				failed: 0,
+				slow: 0
+			},
+			connections: {
+				active: 0,
+				idle: 0,
+				failed: 0
+			}
+		};
+	}
+	
+	setupQueryLogging() {
+		this.sequelize.options.benchmark = true;
+		this.sequelize.options.logging = (sql, timing) => {
+			this.metrics.queries.total++;
+			
+			if (timing > 1000) {
+				this.metrics.queries.slow++;
+				console.warn(`Slow query (${timing}ms):`, sql);
+			}
+		};
+	}
+	
+	async getPoolStatus() {
+		const pool = this.sequelize.connectionManager.pool;
+		return {
+			total: pool.size,
+			idle: pool.idle,
+			active: pool.size - pool.idle
+		};
+	}
+	
+	async getMetrics() {
+		const poolStatus = await this.getPoolStatus();
+		return {
+			...this.metrics,
+			pool: poolStatus,
+			timestamp: new Date()
+		};
+	}
+}
+	\end{minted}
+	
+	\subsection{Error Handling}
+	Implementing robust error handling:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// src/middleware/errorHandler.js
+class DatabaseErrorHandler {
+	static handle(error) {
+		if (error instanceof Sequelize.ConnectionError) {
+			return {
+				status: 503,
+				message: 'Database connection error',
+				retryAfter: 30
+			};
+		}
+		
+		if (error instanceof Sequelize.ValidationError) {
+			return {
+				status: 400,
+				message: 'Validation error',
+				errors: error.errors.map(err => ({
+					field: err.path,
+					message: err.message
+				}))
+			};
+		}
+		
+		if (error instanceof Sequelize.UniqueConstraintError) {
+			return {
+				status: 409,
+				message: 'Duplicate entry',
+				errors: error.errors.map(err => ({
+					field: err.path,
+					message: 'Already exists'
+				}))
+			};
+		}
+		
+		// Default error
+		return {
+			status: 500,
+			message: 'Internal server error'
+		};
+	}
+}
+	\end{minted}
+	
+	\section{Scaling Strategies}
+	
+	\subsection{Read Replicas}
+	Configuring read replicas for better performance:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// config/database.js
+module.exports = {
+	production: {
+		dialect: 'postgres',
+		replication: {
+			read: [
+			{ host: 'read-replica-1', username: '...' },
+			{ host: 'read-replica-2', username: '...' }
+			],
+			write: { host: 'master', username: '...' }
+		},
+		pool: {
+			max: 20,
+			idle: 30000
+		}
+	}
+};
+
+// Usage in services
+class UserService {
+	async findUsers(criteria) {
+		// Read from replica
+		return await User.findAll({
+			where: criteria
+		});
+	}
+	
+	async createUser(data) {
+		// Write to master
+		return await User.create(data, {
+			useMaster: true
+		});
+	}
+}
+	\end{minted}
+	
+	\subsection{Connection Pooling}
+	Implementing advanced connection pooling:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// src/database/poolConfig.js
+const poolConfig = {
+	max: 20, // Maximum pool size
+	min: 5,  // Minimum pool size
+	acquire: 30000, // Maximum time to acquire connection
+	idle: 10000,    // Maximum idle time
+	evict: 1000,    // Run eviction every 1 second
+	validate: async (connection) => {
+		try {
+			await connection.query('SELECT 1');
+			return true;
+		} catch (e) {
+			return false;
+		}
+	}
+};
+
+const sequelize = new Sequelize({
+	...config,
+	pool: poolConfig,
+	hooks: {
+		beforeConnect: async (config) => {
+			// Log connection attempts
+		},
+		afterDisconnect: async () => {
+			// Clean up resources
+		}
+	}
+});
+	\end{minted}
+	
+	\section{Deployment Process}
+	
+	\subsection{Migration Strategy}
+	Implementing safe database migrations:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// scripts/deploy.js
+async function deploy() {
+	try {
+		// 1. Backup database
+		await backupDatabase();
+		
+		// 2. Run migrations
+		await sequelize.authenticate();
+		await runMigrations();
+		
+		// 3. Verify migrations
+		await verifyMigrations();
+		
+		// 4. Update application
+		await updateApplication();
+		
+	} catch (error) {
+		// Rollback if needed
+		await rollback();
+		throw error;
+	}
+}
+
+async function runMigrations() {
+	const umzug = new Umzug({
+		migrations: {
+			path: './migrations',
+			params: [sequelize.getQueryInterface()]
+		},
+		storage: 'sequelize',
+		storageOptions: { sequelize }
+	});
+	
+	return umzug.up();
+}
+	\end{minted}
+	
+	\section{Maintenance Procedures}
+	
+	\subsection{Database Maintenance}
+	Regular maintenance tasks:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// scripts/maintenance.js
+class DatabaseMaintenance {
+	static async vacuum() {
+		await sequelize.query('VACUUM ANALYZE');
+	}
+	
+	static async reindex() {
+		const tables = await sequelize.getQueryInterface()
+		.showAllTables();
+		
+		for (const table of tables) {
+			await sequelize.query(`REINDEX TABLE "${table}"`);
+		}
+	}
+	
+	static async cleanupSoftDeleted() {
+		const models = Object.values(sequelize.models)
+		.filter(model => model.options.paranoid);
+		
+		for (const model of models) {
+			await model.destroy({
+				where: {
+					deletedAt: {
+						[Op.lt]: moment().subtract(3, 'months')
+					}
+				},
+				force: true
+			});
+		}
+	}
+}
+	\end{minted}
+	
+	\section{Security Considerations}
+	
+	\subsection{SQL Injection Prevention}
+	Implementing secure query practices:
+	
+	\begin{minted}[fontsize=\footnotesize, xleftmargin=0pt]{js}
+// src/services/secureQueryBuilder.js
+class SecureQueryBuilder {
+	static buildWhereClause(filters) {
+		const where = {};
+		const allowedOperators = ['eq', 'gt', 'lt', 'like'];
+		
+		for (const [key, value] of Object.entries(filters)) {
+			if (typeof value === 'object') {
+				const operator = Object.keys(value)[0];
+				if (!allowedOperators.includes(operator)) {
+					throw new Error(`Invalid operator: ${operator}`);
+				}
+				where[key] = { [Op[operator]]: value[operator] };
+			} else {
+				where[key] = value;
+			}
+		}
+		
+		return where;
+	}
+	
+	static sanitizeOrder(orderBy) {
+		const allowedFields = ['id', 'createdAt', 'updatedAt'];
+		const [field, direction] = orderBy.split(' ');
+		
+		if (!allowedFields.includes(field)) {
+			throw new Error(`Invalid order field: ${field}`);
+		}
+		
+		return [[field, direction.toUpperCase()]];
+	}
+}
+	\end{minted}
+	
+	\section{Best Practices}
+	
+	\subsection{Deployment Checklist}
+	\begin{itemize}
+		\item Backup database before deployment
+		\item Run migrations in a transaction
+		\item Verify database connections
+		\item Monitor query performance
+		\item Set up proper logging
+		\item Configure connection pools
+		\item Implement health checks
+		\item Set up monitoring alerts
+	\end{itemize}
+	
+	\section{Summary}
+	Key takeaways:
+	\begin{itemize}
+		\item Production configuration best practices
+		\item Performance optimization techniques
+		\item Monitoring and logging strategies
+		\item Scaling approaches
+		\item Security considerations
+		\item Maintenance procedures
+	\end{itemize}
+
+\end{document}

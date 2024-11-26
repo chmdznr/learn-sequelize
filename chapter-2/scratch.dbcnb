@@ -1,0 +1,1 @@
+[{"kind":2,"language":"sql","value":"DROP DATABASE IF EXISTS sequelize_demo;"},{"kind":2,"language":"sql","value":"CREATE DATABASE sequelize_demo;"},{"kind":2,"language":"sql","value":"drop TABLE public.\"Users\" cascade;"}]
